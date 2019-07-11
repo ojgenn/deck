@@ -1,0 +1,46 @@
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.decks {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.deck {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 150px;
+  border: 1px solid gray;
+  margin: 8px;
+}
+
+.top .bottom {
+  font-size: 32px;
+}
+
+.top {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.bottom {
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
+}
+
+.center {
+  font-size: 64px;
+}
