@@ -1,19 +1,24 @@
 <div>
-  <div>
-    <button (click)="deal()">Deal</button> <button (click)="clear()">Clear</button>
+  <div class="buttons">
+
+    <button (click)="deal()">Deal</button>
+    <button (click)="clear()">Clear</button>
+
   </div>
+
   <div class="decks">
-    <div *ngFor="let deck of deckToShow" [ngClass]="suitsColors[deck.suit]" class="deck">
-      <div class="top">
-        <div>{{deck.face}}</div>
-        <div>{{deck.suit}}</div>
-      </div>
-      <div class="center">{{deck.suit}}</div>
-      <div class="bottom">
-        <div>{{deck.face}}</div>
-        <div>{{deck.suit}}</div>
-      </div>
+
+    <div *ngFor="let card of deckToShow;trackBy: trackByFn"
+         [ngClass]="card.color" class="deck">
+
+      <app-card-suite-and-face [suiteAndFace]="card" class="top"></app-card-suite-and-face>
+
+      <div class="center">{{card.suit}}</div>
+
+      <app-card-suite-and-face [suiteAndFace]="card" class="bottom"></app-card-suite-and-face>
+
     </div>
+
   </div>
 
 </div>

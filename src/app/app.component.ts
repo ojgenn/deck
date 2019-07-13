@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import * as deckConstants from './commons/constants/suits-and-faces';
 
-interface DeckInterface {
+export interface DeckInterface {
   suit: string;
   face: string;
+  color: string;
 }
 
 const CARDS_TO_SHOW = 5;
@@ -16,7 +17,6 @@ const CARDS_TO_SHOW = 5;
 export class AppComponent {
   deck: Deck = new Deck();
   deckToShow: Array<DeckInterface> = [];
-  suitsColors = deckConstants.suitsColors;
   constructor() {
   }
 
@@ -29,6 +29,10 @@ export class AppComponent {
     this.deck.clear();
     this.deckToShow = this.deck.getDeckToShow();
   }
+
+  trackByFn(index, item) {
+    return index;
+  }
 }
 
 class Deck {
@@ -38,9 +42,10 @@ class Deck {
   deal(num): void {
     const deckToShow: Array<DeckInterface> = [];
     for (let i = 0; i < num; i++) {
-      const randomIndex = getRandomInt(0, this._deck.length);
+      let randomIndex = getRandomInt(0, this._deck.length);
       if (!this._deck[randomIndex]) {
         this._deck = this._initDeck();
+        randomIndex = getRandomInt(0, this._deck.length);
       }
       deckToShow.push(this._deck[randomIndex]);
       this._deck.splice(randomIndex, 1);
@@ -64,7 +69,7 @@ class Deck {
     const deck = [];
     deckConstants.suits.forEach(suit => {
       deckConstants.faces.forEach(face => {
-        deck.push({suit, face});
+        deck.push({suit, face, color: deckConstants.suitsColors[suit]});
       });
     });
     return deck;
